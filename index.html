@@ -1,0 +1,135 @@
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+            El numero Actual es : <label id='lblNumero'>0</label>
+            <input type="number" id="txtValor" value="0" />
+            <hr>
+
+            Cual es el siguiente?
+            <hr>
+
+            <button type="button"
+                    onclick="mayor()"
+                    disabled
+                    id="btnMayor"
+                    class="btn btn-primary">
+                Mayor
+            </button>
+
+            <button type="button"
+                    onclick="menor()"
+                    disable
+                    id="btnMenor"
+                    class="btn btn-secondary">
+                Menor
+            </button>
+            <hr>
+
+            <input type="button"
+                   class="SuperLetra"
+                   value="Restart"
+                   onclick="restart()"
+                   id="btnRestart" />
+            <hr />
+            <input type="number" id="txtPartidas" value="" />
+        </div>
+        
+        <style>
+            #btnRestart {
+                background-color: black;
+                color: white;
+            }
+
+            .SuperLetra {
+                font-size: 50px;
+                background-color: red !important;
+            }
+        </style>
+
+        <script>
+            var cantidadOK = 0;
+            var cantidadDePartidas = 0;
+            function restart() {
+                var label = document.getElementById('lblNumero');
+                label.innerHTML = '0';
+                var texto = document.getElementById('txtValor');
+                texto.value = '0';
+                generarEstado(true);
+                cantidadOK = 0;
+                cantidadDePartidas++;
+                
+                document.getElementById('txtPartidas').value = cantidadDePartidas;
+                // texto.style.backgroundColor = 'red';
+                // texto.style.fontSize = '50px';
+            }
+            function saludar(msj) {
+                alert(msj);
+            }
+            function generarEstado(activar) {
+                var btnMayor = document.getElementById('btnMayor');
+                var btnMenor = document.getElementById('btnMenor');
+                btnMayor.disabled = !activar; //si el parametro es falso desactiva los botones
+                btnMenor.disabled = !activar;
+                if (activar) {
+                    document.getElementById('txtValor').value = cantidadOK;
+                    cantidadOK++;
+                } else {
+                    document.getElementById('txtValor').value = cantidadOK;
+                   
+                }
+                
+            }
+            function mayor() {
+                //var numeroRandom = (Math.floor(Math.random() * 10) + 1);
+                //console.log(numeroRandom);
+                //var label = document.getElementById('lblNumero');
+                //var numeroAnterior = parseInt(label.innerHTML);
+                //if (numeroRandom >= numeroAnterior) {
+                //    alert('vamooo');
+                //} else {
+                //    alert('perdio!');
+                //    generarEstado(false);
+                //}
+                //label.innerHTML = numeroRandom;
+                var sigueJugando = validarMayorMenor('MAYOR');
+                generarEstado(sigueJugando);
+            }
+            function menor() {
+                //var numeroRandom = (Math.floor(Math.random() * 10) + 1);
+                //console.log(numeroRandom);
+                //var label = document.getElementById('lblNumero');
+                //var numeroAnterior = parseInt(label.innerHTML);
+                //if (numeroRandom <= numeroAnterior) {
+                //    alert('Vamooo');
+                //} else {
+                //    alert('Perdio!');
+                //    generarEstado(false);
+                //}
+                //label.innerHTML = numeroRandom;
+                var sigueJugando = validarMayorMenor('MENOR');
+                generarEstado(sigueJugando);
+            }
+
+            function validarMayorMenor(mayorMenor) {
+                var numeroRandom = (Math.floor(Math.random() * 10) + 1); //te da un numero random de 0 a 10
+                var label = document.getElementById('lblNumero');
+                var numeroAnterior = parseInt(label.innerHTML);
+                label.innerHTML = numeroRandom;
+                if (mayorMenor == 'MAYOR') {
+                    return numeroRandom >= numeroAnterior;
+                }
+                if (mayorMenor == 'MENOR') {
+                    return numeroRandom <= numeroAnterior;
+                }
+                return false;
+            }
+
+        </script>
+
+    </body>
+
+
+</html>
